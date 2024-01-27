@@ -1,38 +1,47 @@
 #include<stdio.h>
+#include<string.h>
 int main()
 {
-		char pass[20];
-		int i;
+		char password[20];
+		char passInput[20];
+		int i,flag;
+		int tryAgain;
 		const char filepath[] = "f:/code/problems/Authentication/Passwords.txt";
 		FILE *file;
 
-		file = fopen(filepath,"a");
-		
+		file = fopen(filepath,"r");
+
 		if(file == NULL)
 		{
-				printf("File hasnt been opened.\nYou did something wrong bud.");
+				printf("File could not be opened");
 				return 1;
 		}
+
 		else
 		{
-				printf("File has been opened!");
-				fseek(file, 0, SEEK_END);
-				int size = ftell(file);
-				if(size == 0)
+				printf("File has been opened!\n");
+				fgets(password, 20, file);
+				gets(passInput);
+
+				for(i=0; i<strlen(password); i++)
 				{
-						gets(pass);
-						fputs(pass,file);
-				}
-				else
-				{
-						printf("Enter Password: ");
-						gets(pass);
-						while((ch = fgetc(file)) != EOF){
-								if(ch!=)
+						flag=0;
+						if(password[i] != passInput[i])
+						{
+								printf("WRONG");
+								flag++;
+								break;
 						}
-						if()
 				}
-				return 1;
+				if(flag == 0)
+				{	
+						printf("Correct!");
+				}
+
+
+			
+				fclose(file);
+				return 0;
 		}
 
 
